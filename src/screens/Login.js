@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     link: {
         marginTop: 15,
         textAlign: 'center',
-        color: '#4e95ff',
+        color: '#c8f010',
     },
 })
 

@@ -25,7 +25,7 @@ function HomeMenu() {
             <Tab.Screen
                 name="NuevoPost"
                 component={ NuevoPost }
-                options={ { tabBarIcon: () => <FontAwesome name="plus-circle" size={30} color="#4e95ff" /> } }
+                options={ { tabBarIcon: () => <FontAwesome name="plus-circle" size={30} color="#c8f010" /> } }
             />
             <Tab.Screen
                 name="Profile"
