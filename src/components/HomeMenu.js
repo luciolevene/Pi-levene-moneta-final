@@ -9,21 +9,28 @@ const Tab = createBottomTabNavigator();
 
 function HomeMenu() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={ {
+            tabBarShowLabel: false,
+            headerShown: false,
+            tabBarStyle: {
+                backgroundColor: '#000000',
+                borderTopColor: '#303030',
+            },
+        } }>
             <Tab.Screen
                 name="Home"
                 component={ Home }
-                options={ { tabBarIcon: () => <FontAwesome name="home" size={24} color="black" /> } }
+                options={ { tabBarIcon: () => <FontAwesome name="home" size={26} color="#f3f4f5" /> } }
             />
             <Tab.Screen
                 name="NuevoPost"
                 component={ NuevoPost }
-                options={ { tabBarIcon: () => <FontAwesome name="plus-circle" size={24} color="black" /> } }
+                options={ { tabBarIcon: () => <FontAwesome name="plus-circle" size={30} color="#4e95ff" /> } }
             />
             <Tab.Screen
                 name="Profile"
                 component={ Profile }
-                options={ { tabBarIcon: () => <FontAwesome name="user" size={24} color="black" /> } }
+                options={ { tabBarIcon: () => <FontAwesome name="user" size={26} color="#f3f4f5" /> } }
             />
         </Tab.Navigator>
     )
