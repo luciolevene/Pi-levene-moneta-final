@@ -1,15 +1,40 @@
 import { useState } from "react";
 import { View, Text, TextInput, Pressable, Image, StyleSheet } from "react-native";
+import { auth, db } from "../firebase/config";
 
 function Register(props) {
     const [email, setEmail] = useState("");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [registerError, setRegisterError] = useState("");
+
+    function register(email, password, userName) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .then( response => {
+                return db.collection('users').add({
+                    email: auth.currentUser.email,
+                    userName: userName,
+                    createdAt: Date.now(),
+                })
+            })
+            .then( () => {
+                setRegisterError("");
+                auth.signOut();
+                props.navigation.navigate('Login');
+            })
+            .catch( error => {
+                console.log(error);
+                setRegisterError(error.message);
+            })
+    }
 
     function onSubmit() {
-        console.log("Email:", email);
-        console.log("UserName:", userName);
-        console.log("Password:", password);
+        if (email === "" || userName === "" || password === "") {
+            setRegisterError("Todos los campos son obligatorios");
+            return;
+        }
+
+        register(email, password, userName);
     }
 
     return (
@@ -48,6 +73,8 @@ function Register(props) {
             <Pressable style={styles.boton} onPress={ () => onSubmit() }>
                 <Text style={styles.textoBoton}>Registrarse</Text>
             </Pressable>
+
+            <Text style={styles.error}>{registerError}</Text>
 
             <Pressable onPress={ () => props.navigation.navigate('Login') }>
                 <Text style={styles.link}>Ya tengo cuenta</Text>
@@ -101,8 +128,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    error: {
+        color: '#e5484d',
+        marginTop: 12,
+        textAlign: 'center',
+    },
     link: {
-        marginTop: 15,
+        marginTop: 5,
         textAlign: 'center',
         color: '#c8f010',
     },
