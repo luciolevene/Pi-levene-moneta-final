@@ -12,15 +12,11 @@ function HomeMenu() {
         <Tab.Navigator screenOptions={ {
             tabBarShowLabel: false,
             headerShown: false,
-            tabBarStyle: {
-                backgroundColor: '#000000',
-                borderTopColor: '#303030',
-            },
         } }>
             <Tab.Screen
                 name="Home"
                 component={ Home }
-                options={ { tabBarIcon: () => <FontAwesome name="home" size={26} color="#f3f4f5" /> } }
+                options={ { tabBarIcon: () => <FontAwesome name="home" size={26} color="#000000" /> } }
             />
             <Tab.Screen
                 name="NuevoPost"
@@ -30,7 +26,7 @@ function HomeMenu() {
             <Tab.Screen
                 name="Profile"
                 component={ Profile }
-                options={ { tabBarIcon: () => <FontAwesome name="user" size={26} color="#f3f4f5" /> } }
+                options={ { tabBarIcon: () => <FontAwesome name="user" size={26} color="#000000" /> } }
             />
         </Tab.Navigator>
     )
