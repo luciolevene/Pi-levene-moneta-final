@@ -1,13 +1,31 @@
 import { useState } from "react";
 import { View, Text, TextInput, Pressable, Image, StyleSheet } from "react-native";
+import { auth } from "../firebase/config";
 
 function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loginError, setLoginError] = useState("");
+
+    function login(email, password) {
+        auth.signInWithEmailAndPassword(email, password)
+            .then( response => {
+                setLoginError("");
+                props.navigation.navigate('HomeMenu', { screen: 'Home' });
+            })
+            .catch( error => {
+                console.log(error);
+                setLoginError('Credenciales inválidas.');
+            })
+    }
 
     function onSubmit() {
-        console.log("Email:", email);
-        console.log("Password:", password);
+        if (email === "" || password === "") {
+            setLoginError("Todos los campos son obligatorios");
+            return;
+        }
+
+        login(email, password);
     }
 
     return (
@@ -36,6 +54,8 @@ function Login(props) {
             <Pressable style={styles.boton} onPress={ () => onSubmit() }>
                 <Text style={styles.textoBoton}>Iniciar sesión</Text>
             </Pressable>
+
+            <Text style={styles.error}>{loginError}</Text>
 
             <Pressable onPress={ () => props.navigation.navigate('Register') }>
                 <Text style={styles.link}>No tengo cuenta</Text>
@@ -89,8 +109,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    error: {
+        color: '#e5484d',
+        marginTop: 12,
+        textAlign: 'center',
+    },
     link: {
-        marginTop: 15,
+        marginTop: 5,
         textAlign: 'center',
         color: '#c8f010',
     },
