@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { db } from "../firebase/config";
+import Post from "../components/Post";
 
 function Home(props) {
     const [posteos, setPosteos] = useState([]);
@@ -27,7 +28,7 @@ function Home(props) {
                 <FlatList
                     data={posteos}
                     keyExtractor={item => item.id.toString()}
-                    renderItem={({ item }) => <Text style={styles.post}>{item.data.description}</Text>}
+                    renderItem={({ item }) => <Post post={item} />}
                 />
             </View>
         </View>
@@ -50,11 +51,7 @@ const styles = StyleSheet.create({
     flatlist: {
         width: '100%',
         flex: 1,
-    },
-    post: {
-        color: '#f3f4f5',
-        marginBottom: 10,
-    },
+    }
 })
 
 export default Home
