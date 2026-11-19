@@ -32,7 +32,7 @@ function Post(props) {
             <Text style={styles.descripcion}>{props.post.data.description}</Text>
             <Text style={styles.likes}>Likes: {props.post.data.likes.length}</Text>
             <Pressable onPress={() => likear()}>
-                <Text style={styles.accion}>Me gusta</Text>
+                <Text style={styles.accion}>{props.post.data.likes.includes(auth.currentUser.email) ? "Quitar like" : "Me gusta"}</Text>
             </Pressable>
         </View>
     )
