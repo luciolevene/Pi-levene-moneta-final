@@ -28,7 +28,7 @@ function Home(props) {
                 <FlatList
                     data={posteos}
                     keyExtractor={item => item.id.toString()}
-                    renderItem={({ item }) => <Post post={item} />}
+                    renderItem={({ item }) => <Post post={item} navigation={props.navigation} />}
                 />
             </View>
         </View>

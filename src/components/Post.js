@@ -34,6 +34,9 @@ function Post(props) {
             <Pressable onPress={() => likear()}>
                 <Text style={styles.accion}>{props.post.data.likes.includes(auth.currentUser.email) ? "Quitar like" : "Me gusta"}</Text>
             </Pressable>
+            <Pressable onPress={() => props.navigation.navigate('Home', { screen: 'Comentarios', params: { id: props.post.id } })}>
+                <Text style={styles.accion}>Comentar</Text>
+            </Pressable>
         </View>
     )
 }
